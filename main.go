@@ -53,25 +53,25 @@ func sendTemperature(w http.ResponseWriter, r *http.Request) {
 
 		log.Printf("%q", temperatureString)
 
-		if temperatureFloat > 29.00 { // Меняем переменную currentHeatingStatus указывая на то, что нагрев больше не происходит
+		if temperatureFloat > 34.00 { // Меняем переменную currentHeatingStatus указывая на то, что нагрев больше не происходит
 			//sendMessageToTelegram("Temperature is now - " + temperatureString + ", too hot!")
 			currentHeatingStatus = 0
 		}
 
-		if temperatureFloat < 26.00 { // Нагрев происходит
+		if temperatureFloat < 28.00 { // Нагрев происходит
 			currentHeatingStatus = 1
 		}
 
 		previousTempString = temperatureString // Записываем текущее значение в переменную, на случай не полученного следующего
 
-		response := APIReturn{CurrentTemperature: temperatureString, TargetHeating: 0, TargetTemperature: 29.00, CurrentHeating: currentHeatingStatus} // Формируем ответ используя структуру APIReturn
+		response := APIReturn{CurrentTemperature: temperatureString, TargetHeating: 0, TargetTemperature: 34.00, CurrentHeating: currentHeatingStatus} // Формируем ответ используя структуру APIReturn
 
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(response)
 
 	} else { // Если вернулось сообщение отличное от 5 байт, тогда используем предыдущее значение
 
-		response := APIReturn{CurrentTemperature: previousTempString, TargetHeating: 0, TargetTemperature: 29.00, CurrentHeating: currentHeatingStatus} // Формируем ответ используя структуру APIReturn
+		response := APIReturn{CurrentTemperature: previousTempString, TargetHeating: 0, TargetTemperature: 34.00, CurrentHeating: currentHeatingStatus} // Формируем ответ используя структуру APIReturn
 
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(response)

@@ -100,13 +100,13 @@ void loop(void) {
   }
 
   nowTemp = (float)raw / 16.0;
-  maxTemp = 29.00;
-  minTemp = 26.00;
+  maxTemp = 34.00;
+  minTemp = 28.00;
 
-  if (nowTemp >= maxTemp){  // Если температура больше или равна 29, тогда выключаем реле
+  if (nowTemp >= maxTemp){  // Если температура больше или равна maxTemp, тогда выключаем реле
     digitalWrite(Relay, HIGH); 
   }
-  if (nowTemp <= minTemp){  // Если темпратура меньше 26, тогда включаем реле
+  if (nowTemp <= minTemp){  // Если темпратура меньше minTemp, тогда включаем реле
     digitalWrite(Relay, LOW); 
   }
   
